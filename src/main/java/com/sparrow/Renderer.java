@@ -2,6 +2,7 @@ package com.sparrow;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.commonmark.node.Node;
@@ -10,23 +11,25 @@ import org.commonmark.renderer.html.HtmlRenderer;
 
 public class Renderer {
 
-    private String filePath = "";
+    private Path inputPath = null;
+    private Path outputPath = null;
 
     public Renderer(String file) {
 
-        filePath = file;
+        inputPath = Paths.get("input/" + file + ".md");
+        outputPath = Paths.get("output/" + file + ".html");
 
     }
 
-    public void renderTo(String path) throws IOException {
+    public void renderTo() throws IOException {
 
-        Files.write(Paths.get("output/" + path), render().getBytes());
+        Files.write(outputPath, render().getBytes());
 
     }
 
     private String render() throws IOException {
 
-        String content = new String(Files.readAllBytes(Paths.get("input/" + filePath)));
+        String content = new String(Files.readAllBytes(inputPath));
 
         return renderText(content);
 
