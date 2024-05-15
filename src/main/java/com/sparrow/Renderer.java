@@ -14,10 +14,10 @@ public class Renderer {
     private Path inputPath = null;
     private Path outputPath = null;
 
-    public Renderer(String file) {
+    public Renderer(String fileIn, String fileOut) {
 
-        inputPath = Paths.get("input/" + file + ".md");
-        outputPath = Paths.get("output/" + file + ".html");
+        inputPath = Paths.get("input/" + fileIn + ".md");
+        outputPath = Paths.get("output/" + fileOut + ".html");
 
     }
 
