@@ -4,8 +4,14 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * A class for watching for file changes.
+ */
 public class FileWatcher {
 
+    /**
+     * Watches for changes, stalling until a file is changed
+     */
     public static void watch(int timeout) {
 
         HashMap<Path, String> hashes = new HashMap<>();
@@ -14,8 +20,6 @@ public class FileWatcher {
         for (JournalEntry x : entries) {
             hashes.put(x.getPath(), Hasher.hash(x.getPath()));
         }
-
-        System.out.println("hashes: " + hashes);
 
         boolean done = false;
 

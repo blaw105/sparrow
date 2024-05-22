@@ -8,8 +8,16 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * Represents all of the entries.
+ */
 public class EntryCollection {
 
+    /**
+     * Gets all of the entries using the file paths
+     *
+     * @return All the entries
+     */
     public static ArrayList<JournalEntry> getEntries() {
 
         ArrayList<JournalEntry> entries = new ArrayList<>();

@@ -31,7 +31,7 @@ public class Renderer {
 
         String content = new String(Files.readAllBytes(inputPath));
 
-        return renderText(content);
+        return Template.insert(renderText(content));
 
     }
 
