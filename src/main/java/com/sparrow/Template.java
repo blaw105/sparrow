@@ -5,8 +5,18 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+/**
+ * Represents a base template for HTML output
+ */
 public class Template {
 
+    /**
+     * Inserts HTML content into the file
+     *
+     * @param str The HTML content
+     *
+     * @return The final content
+     */
     public static String insert(String str) {
 
         String res = "";
@@ -18,10 +28,12 @@ public class Template {
 <style>
         """;
 
+        String cssPath = (
+            "static/" + (new SettingManager(Paths.get("mode.txt"))).getMode() + ".css"
+        );
+
         try {
-            res += new String(
-                Files.readAllBytes(Paths.get("static/dark.css")), StandardCharsets.UTF_8
-            );
+            res += new String(Files.readAllBytes(Paths.get(cssPath)), StandardCharsets.UTF_8);
         } catch (IOException e) {}
 
         res += """
@@ -36,7 +48,7 @@ public class Template {
             String url = x.getTitle();
             res += "<li>";
             res += "<a href=" + "\"" + "./" + url + ".html" + "\"" + ">";
-            res += url;
+            res += url + " - " + x.getEntryDate();
             res += "</a>";
             res += "</li>" + "\n";
         }

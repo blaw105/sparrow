@@ -2,8 +2,14 @@ package com.sparrow;
 
 import java.io.IOException;
 
+/**
+ * A class that renders all the journals
+ */
 public class JournalRenderer {
 
+    /**
+     * Renders all the files
+     */
     public void render() {
 
         for (JournalEntry x : EntryCollection.getEntries()) {
@@ -16,6 +22,9 @@ public class JournalRenderer {
 
     }
 
+    /**
+     * Watches for reloads and rerenders
+     */
     public void watch() {
 
         render();
