@@ -8,7 +8,7 @@ import java.security.NoSuchAlgorithmException;
 
 public class Hasher {
 
-    public static byte[] hash(Path path) {
+    public static String hash(Path path) {
 
         byte[] bytes = null;
 
@@ -17,10 +17,22 @@ public class Hasher {
         } catch (IOException e) {}
 
         try {
-            return MessageDigest.getInstance("MD5").digest(bytes);
+            return convert(MessageDigest.getInstance("MD5").digest(bytes));
         } catch (NoSuchAlgorithmException e) {
-            return new byte[0];
+            return "";
         }
+
+    }
+
+    private static String convert(byte[] hash) {
+
+        StringBuilder builder = new StringBuilder();
+
+        for (byte x : hash) {
+            builder.append(String.format("%02x", x));
+        }
+
+        return builder.toString();
 
     }
 
