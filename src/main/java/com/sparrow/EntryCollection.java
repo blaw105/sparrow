@@ -7,9 +7,18 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 
+/**
+ * Represents all of the entries.
+ */
 public class EntryCollection {
 
+    /**
+     * Gets all of the entries using the file paths
+     *
+     * @return All the entries
+     */
     public static ArrayList<JournalEntry> getEntries() {
 
         ArrayList<JournalEntry> entries = new ArrayList<>();
@@ -29,6 +38,8 @@ public class EntryCollection {
         } catch (IOException e) {
             System.out.println("Make the folder please.");
         }
+
+        Collections.sort(entries);
 
         return entries;
 

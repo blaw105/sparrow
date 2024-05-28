@@ -1,4 +1,13 @@
-import java.util.*;
+package com.sparrow;
+
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 // declare all the fields and do some calculations to  assign them values.
 
@@ -7,30 +16,26 @@ public class SettingManager
     private String mode;
     private String order;
     private String direction;
-    private ArrayList<Date> dset=new ArrayList<Date>();
+    private ArrayList<LocalDate> dset=new ArrayList<LocalDate>();
     private ArrayList<JournalEntry> jset= EntryCollection.getEntries();
     private ArrayList<String> tset= new ArrayList<String>();
-    for(JournalEntry i:jset){
-        dset.add(i.getEntryDate());
-        tset.add(i.getTitle());
-    }
-    public SettingManager(String mode1, String order1, String direction1 ){
-        mode=mode1;
-        order=order1;
-        direction=direction1;
+    public SettingManager(Path path){
+        for(JournalEntry i:jset){
+            dset.add(i.getEntryDate());
+            tset.add(i.getTitle());
+        }
+        direction = "ascending";
+        try {
+            mode = (new String(Files.readAllBytes(path), StandardCharsets.UTF_8)).strip();
+        } catch (IOException e) {
+            mode = "light";
+        }
     }
     public void switchMode(){
-        Theme theme1= new Theme();
-        if(mode.equals("dark")){
-            theme1.modifyBG("white");
-            theme1.modifyTextColor("black");
-        }
-        else if(mode.equals("light")){
-            theme1.mpdifyBG("black");
-            theme1.modifyTextColor("white");
-        }
-        else{
-            System.out.println("The mode doesn't exist.");
+        if (mode.equals("light")) {
+            mode = "dark";
+        } else {
+            mode = "light";
         }
     }
     public void switchOrder(){
@@ -61,7 +66,7 @@ public class SettingManager
             System.out.println("The order doesn't exist.");
         }
     }
-    public ArrayList<Date> getDateSet(){
+    public ArrayList<LocalDate> getDateSet(){
         return dset;
     }
     public ArrayList<String> getTitleSet(){
@@ -87,5 +92,3 @@ public class SettingManager
     }
 
 }
-
-

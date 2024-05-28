@@ -1,7 +1,13 @@
 package com.sparrow;
 
+/**
+ * Main class to run project
+ */
 public class Main {
 
+    /**
+     * Runs the project
+     */
     public static void main(String[] args) {
 
         JournalRenderer renderer = new JournalRenderer();

@@ -2,7 +2,7 @@ package com.sparrow;
 import java.nio.file.Path;
 import java.time.LocalDate;
 
-public class JournalEntry {
+public class JournalEntry implements Comparable<JournalEntry> {
     private Path path;
     private LocalDate entryDate;
     private String title;
@@ -54,4 +54,11 @@ public class JournalEntry {
     public String getMood() {
         return mood;
     }
+
+    public int compareTo(JournalEntry other) {
+
+        return entryDate.compareTo(other.entryDate);
+
+    }
+
 }
